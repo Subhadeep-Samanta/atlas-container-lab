@@ -13,12 +13,18 @@ if (!appEnv) {
   process.exit(1);
 }
 
+if (!appPort) {
+  console.error("Error: APP_PORT is not set");
+  process.exit(1);
+}
+
+
 // Single route
 app.get("/", (req, res) => {
   res.status(200).send("Atlas app is running");
 });
 
 // Listen on the configured port (never hardcode)
-app.listen(appPort, () => {
+app.listen(appPort,"0.0.0.0", () => {
   console.log(`Atlas app listening on port ${appPort}`);
 });
